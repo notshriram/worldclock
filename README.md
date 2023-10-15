@@ -1,6 +1,9 @@
 # worldclock
 Terminal ui worldclock
 
+<img src="https://github.com/notshriram/worldclock/assets/49370927/d6b3cddb-d254-4284-b379-7e6752c94377" width="512">
+
+
 ## Building
 
 ```bash
