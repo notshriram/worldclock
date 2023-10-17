@@ -15,9 +15,7 @@ ftxui::Component WatchComponent(const std::string& tz, const std::chrono::time_p
     using namespace std::chrono;
     using namespace std::chrono_literals;
 
-    // std::chrono::zoned_time zt{ tz, time };
-
     return Renderer([tz, &time] {
-        return window(text(tz), text(std::format("{:%Y-%m-%d %X}", time))) | flex;
+        return window(text(tz), text(std::format("{:%Y-%m-%d %T}", zoned_time{ tz, floor<seconds>(time) }))) | flex;
         });
 }
