@@ -2,8 +2,7 @@
 Terminal ui worldclock. 
 Only works with gcc 13. clang has not implemented chrono timezones as of the date of writing of this readme.
 
-<img src="https://github.com/notshriram/worldclock/assets/49370927/d6b3cddb-d254-4284-b379-7e6752c94377" width="512">
-
+<img src="https://github.com/notshriram/worldclock/assets/49370927/8fa044c0-c1ea-41c0-8a0b-72e43d6d0c83" width="512">
 
 ## Building
 
