@@ -16,6 +16,14 @@
 
 #include <fstream>
 #include <iterator>
+#include <chrono>
+#include <ranges>
+
+template<std::ranges::range R>
+constexpr auto to_vector(R&& r) {
+    using elem_t = std::decay_t<std::ranges::range_value_t<R>>;
+    return std::vector<elem_t>{r.begin(), r.end()};
+}
 
 int main(int argc, const char* argv[]) {
     using namespace ftxui;
@@ -37,6 +45,10 @@ int main(int argc, const char* argv[]) {
     std::vector<std::string> user_zones(std::istream_iterator<std::string>{ifs},
         std::istream_iterator<std::string>{});
 
+    auto& tzdb = std::chrono::get_tzdb();
+    std::vector<std::string> zones = to_vector(tzdb.zones
+        | std::views::transform([](const std::chrono::time_zone& tz) {return std::string(tz.name());}));
+
     auto watches = Container::Vertical({});
 
     for (auto z : user_zones) {
@@ -49,7 +61,7 @@ int main(int argc, const char* argv[]) {
 
     auto main_component = MainComponent(show_modal, exit, watches);
 
-    auto menu_component = MenuComponent(close_modal, set_timezone);
+    auto menu_component = MenuComponent(close_modal, set_timezone, zones);
 
     main_component |= Modal(menu_component, &modal_open);
 
